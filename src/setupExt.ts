@@ -1,6 +1,19 @@
 import * as cp from "child_process";
 import {stringify} from "querystring";
 
+export function listallBuckets(storage: any) {
+  async function listBuckets() {
+    const [buckets] = await storage.getBuckets();
+
+    console.log('Buckets:');
+    buckets.forEach((bucket: {name: any;}) => {
+      console.log(bucket.name);
+    });
+  }
+
+  listBuckets().catch(console.error);
+}
+
 export async function getbucketname(storage: any) {
 
 }

@@ -1,6 +1,6 @@
 {
   "name": "helloworld",
-	"displayName": "HelloWorld",
+	"displayName": "GCP Cloud Composer",
 	"description": "",
 	"version": "0.0.1",
 	"engines": {
@@ -10,8 +10,8 @@
 		"Other"
 	],
 	"activationEvents": [
-        "onCommand:helloworld.helloWorld",
-        "onCommand:helloworld.sayWelcome",
+        "onCommand:helloworld.connectEn",
+        "onCommand:helloworld.listBuckets",
         "onCommand:helloworld.uploadFile",
         "onCommand:helloworld.listFiles"
 	],
@@ -19,11 +19,11 @@
 	"contributes": {
 		"commands": [
 			{
-				"command": "helloworld.helloWorld",
-				"title": "Hello World"
+				"command": "helloworld.listBuckets",
+				"title": "GCP: List all Buckets"
 			},
       {
-        "command": "helloworld.sayWelcome",
+        "command": "helloworld.connectEn",
         "title": "GCP: Connect to an Environment"
       },
       {

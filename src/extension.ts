@@ -3,37 +3,26 @@
 import {config, title} from 'process';
 import * as vscode from 'vscode';
 import * as a from './gcp-config.json';
-import {getbucketname, listFiles} from './setupExt';
+import {getbucketname, listFiles, listallBuckets} from './setupExt';
 import {uploadFile} from './uploadDAG';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-
-  const command = 'helloworld.sayWelcome';
-  var path = require("path")
-
-  let result: string;
-
-  const commandHandler = (name: string = 'Demi') => {
-    vscode.window.showInformationMessage(`Welcome ${name}!!!`);
-  };
-
+  var path = require("path");
   const {Storage} = require('@google-cloud/storage');
   const storage = new Storage();
-  const bucketName = 'europe-west1-test-environme-c9196720-bucket';
-
-  // getbucketname(storage);
-
+  const bucketName = '';
 
   // const gcp = JSON.parse('./gcp-config.json');
-	console.log('Congratulations, your extension "helloworld" is now active!');
+	console.log('Congratulations, your cloud composer extension is active!');
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('helloworld.helloWorld', () => {
-		vscode.window.showInformationMessage('Testing');
+	let bucketsList = vscode.commands.registerCommand('helloworld.listBuckets', () => {
+		listallBuckets(storage);
+	});
+
+  let connectEn = vscode.commands.registerCommand('helloworld.connectEn', () => {
+		vscode.window.showInformationMessage('N/A');
 	});
 
   let uploadfile = vscode.commands.registerCommand('helloworld.uploadFile', () => {
@@ -47,8 +36,7 @@ export function activate(context: vscode.ExtensionContext) {
     listFiles(storage, bucketName);
 	});
 
-	context.subscriptions.push(disposable, uploadfile, listfiles);
-  context.subscriptions.push(vscode.commands.registerCommand(command, commandHandler));
+	context.subscriptions.push(bucketsList, connectEn, uploadfile, listfiles);
 }
 
 // this method is called when your extension is deactivated
